@@ -1,0 +1,23 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t theoppermanian/react-test -f Dockerfile.dev ./client/Dockerfile.dev ./client
+
+script:
+    - docker run -e CI=true theoppermanian/react-test npm test
+
+after_success:
+  - docker build -t theoppermanian/multi-client ./client
+  - docker build -t theoppermanian/multi-nginx ./nginx
+  - docker build -t theoppermanian/multi-server ./server
+  - docker build -t theoppermanian/mutli-worker ./worker
+
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push theoppermanian/multi-client
+  - docker push theoppermanian/multi-nginx
+  - docker push theoppermanian/multi-server
+  - docker push theoppermanian/multi-worker
+
+
