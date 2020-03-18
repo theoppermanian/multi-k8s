@@ -3,7 +3,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t theoppermanian/react-test -f Dockerfile.dev ./client/Dockerfile.dev ./client
+  - docker build -t theoppermanian/react-test -f ./client/Dockerfile.dev ./client
 
 script:
     - docker run -e CI=true theoppermanian/react-test npm test
