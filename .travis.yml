@@ -12,7 +12,7 @@ after_success:
   - docker build -t theoppermanian/multi-client ./client
   - docker build -t theoppermanian/multi-nginx ./nginx
   - docker build -t theoppermanian/multi-server ./server
-  - docker build -t theoppermanian/mutli-worker ./worker
+  - docker build -t theoppermanian/multi-worker ./worker
 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push theoppermanian/multi-client
