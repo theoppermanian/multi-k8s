@@ -20,4 +20,16 @@ after_success:
   - docker push theoppermanian/multi-server
   - docker push theoppermanian/multi-worker
 
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "multi-docker"
+  env: "MultiDocker-env"
+  bucket_name: "elasticbeanstalk-us-east-1-078663776303"
+  bucket_path: "multi-docker"
+  access_key_id: "$AWS_ACCESS_KEY_ID"
+  secret_access_key: "$AWS_SECRET_ACCESS_KEY"
+  on:
+    branch: master
 
